@@ -1,6 +1,12 @@
 rankall <- function(outcome, num = "best") {
   ## Read outcome data
+  dataUrl <- 'https://d396qusza40orc.cloudfront.net/rprog%2Fdata%2FProgAssignment3-data.zip'
+  outcome_zipfile <- 'outcome-data.zip'
   outcome_file <- 'outcome-of-care-measures.csv'
+  if (!file.exists(outcome_file)) {
+    download.file(dataUrl, outcome_zipfile)
+    unzip(zipfile=outcome_zipfile,exdir='.')
+  }
   outcome.df <- read.csv(file=outcome_file, colClasses = "character")
   
   outcome.split <- split(outcome.df, outcome.df$State)
