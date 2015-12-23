@@ -7,20 +7,30 @@ The data for this application come from the Hospital Compare web site (http://ho
 You can specify some parameters in the left side panel. The parameters you use
 are as follows:
 
-- Outcome name
+- Outcome name:
+
 The outcomes for the 30-day mortality rates. You can select one out of 3 
 diseases: "heart attack", "heart failure", and "pneumonia".
 
 - Rank of the hospitals in each state
+
 You can select the rank of the hospitals with these radio buttons.
+
  - best
-   The hospitals which have the *best* 30-day survival rates in each state are displayed in the right panel.
+ 
+   The hospitals which have the **best** 30-day survival rates in each state are displayed in the right panel.
+   
  - worst
-   The hospitals which have the *worst* 30-day survival rates in each state are displayed in the right panel.
+ 
+   The hospitals which have the **worst** 30-day survival rates in each state are displayed in the right panel.
+   
  - any number
+ 
    This button is used when you specify the rank you want to see. The number 
    is specified in the textbox below.
+   
 - Number
+
    This textbox is only used when you select "any number" in the ratio buttons
    just displayed above. Default value is 3.
 
