@@ -1,16 +1,83 @@
 ---
-title       : Program Assignment
-subtitle    : 
+title       : Developing Data Products Course Project
+subtitle    : Shiny Application and Reproducible Pitch
 author      : Yoshiteru Kageyama
 job         : Coursera Student
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
-widgets     : [shiny]       # {mathjax, quiz, bootstrap}
+widgets     : [shiny, interactive]            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
 ---
+## Overview
+* This shiny application shows us which hospital is the best and worst in each
+state, when it comes to the 30-day mortality rates. 
 
---- .class #id 
+* The data for this application come from the Hospital Compare web site (http://hospitalcompare.hhs.gov) run by the U.S. Department of Health and Human Services. 
 
-## Slide 2
+* They can provide the information about the quality of care at over 4,000 Medicare-certified hospitals in the U.S.
+
+--- #id class 
+
+## How to use
+You can specify some parameters in the left side panel. The parameters you use
+are as follows:
+* Outcome name  
+The outcomes for the 30-day mortality rates. You can select one out of 3 
+diseases: "heart attack", "heart failure", and "pneumonia".
+* Rank of the hospitals in each state  
+You can select the rank of the hospitals with these radio buttons.
+ * best  
+ This option shows us the *best* hospital in each state.
+ * worst  
+ This option show us the *worst* hospital in each state.
+ * any number  
+ When you specify this option, you can input any rank number.
+* Number  
+This textbox is only used when you select "any number" in the ratio buttons
+just displayed above. Default value is 3.
+
+--- &interactive
+
+## The left panel of this application
+
+```{r opts.label = 'shiny'}
+slidifyUI(
+    sidebarPanel(
+      selectInput("disease", label= h3("Outcome name"),
+                  choices = c("heart attack",
+                              "heart failure",
+                              "pneumonia"),
+                  selected = "heart attack"),
+      radioButtons("rankBtn",
+                   label=h3("Rank of the hospitals in each state"),
+                   choices = list("best" = 1, 
+                                  "worst" = 2, 
+                                  "any number (n-th best hospital). You can
+                                   set it in the input box below" = 3),
+                   selected = 1),
+      numericInput("rankno", label="Number", value=3)
+    ),
+    mainPanel(tableOutput("result"))
+)
+```
+
+--- #id class
+## The example of the output in this application
+
+	 | hospital	                         | state|
+:-:|:---------------------------------:|:----:|	 
+AK |	 PROVIDENCE ALASKA MEDICAL CENTER|	 AK|
+AL |	 CRESTWOOD MEDICAL CENTER	       |   AL|
+AR |   ARKANSAS HEART HOSPITAL	       |   AR|
+AZ |	 MAYO CLINIC HOSPITAL	           |   AZ|
+CA |	GLENDALE ADVENTIST MEDICAL CENTER|	 CA|
+CO |ST MARYS HOSPITAL AND MEDICAL CENTER|	 CO|
+CT | WATERBURY HOSPITAL	               |   CT|
+DC | PROVIDENCE HOSPITAL	             |   DC|
+DE |BAYHEALTH - KENT GENERAL HOSPITAL	 |   DE|
+   |   (Omitted...)                    |     |
+WI | BELLIN MEMORIAL HSPTL	           |   WI|
+WV |MONONGALIA COUNTY GENERAL HOSPITAL |	 WV|
+WY |WYOMING MEDICAL CENTER             |	 WY|
